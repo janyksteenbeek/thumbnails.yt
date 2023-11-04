@@ -4,10 +4,10 @@ import {useEffect} from 'react'
 
 export const runtime = 'edge';
 
-export default function Error({
-                                  error,
-                                  reset,
-                              }: {
+export default function GlobalError({
+                                        error,
+                                        reset,
+                                    }: {
     error: Error & {
         digest?: string
     }

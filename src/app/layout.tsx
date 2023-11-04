@@ -11,8 +11,6 @@ const inter = Inter({
     variable: "--font-sans",
 });
 
-export const runtime = 'edge';
-
 export const metadata = {
     title: "Find all YouTube thumbnails for a channel or video | thumbnails.yt",
     description: "Easily find all full-size live & A/B test YouTube thumbnails for channel or video",
