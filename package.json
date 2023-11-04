@@ -9,7 +9,6 @@
     "start": "next start"
   },
   "dependencies": {
-    "@planetscale/database": "^1.11.0",
     "@t3-oss/env-nextjs": "^0.7.0",
     "@tanstack/react-query": "^4.32.6",
     "@trpc/client": "^10.37.1",
@@ -18,6 +17,7 @@
     "@trpc/server": "^10.37.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "googleapis": "^128.0.0",
     "lucide-react": "^0.290.0",
     "next": "^13.5.4",
     "react": "18.2.0",
@@ -28,6 +28,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@cloudflare/next-on-pages": "^1.7.2",
     "@types/eslint": "^8.44.2",
     "@types/node": "^18.16.0",
     "@types/react": "^18.2.20",
@@ -38,7 +39,6 @@
     "dotenv-cli": "^7.3.0",
     "eslint": "^8.47.0",
     "eslint-config-next": "^13.5.4",
-    "mysql2": "^3.6.1",
     "postcss": "^8.4.27",
     "prettier": "^3.0.0",
     "prettier-plugin-tailwindcss": "^0.5.1",
