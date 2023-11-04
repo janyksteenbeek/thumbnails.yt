@@ -24,8 +24,8 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en">
-        <body className={`thumbnails-yt font-sans ${inter.variable} bg-cover bg-[url(/bg-thumbs.png)]`}>
+        <html lang="en" className="h-full">
+        <body className={`thumbnails-yt h-full font-sans ${inter.variable} bg-cover bg-[url(/bg-thumbs.png)]`}>
         <TRPCReactProvider headers={headers()}>
             <Header/>
             {children}
