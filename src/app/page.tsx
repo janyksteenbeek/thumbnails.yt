@@ -1,4 +1,3 @@
-import {api} from "~/trpc/server";
 import {SearchIcon} from "lucide-react";
 import Image from "next/image";
 import image1 from '~/../public/thumbnails/mrbeast-1.jpeg'
@@ -10,8 +9,7 @@ import {clsx} from "clsx";
 
 export const runtime = 'edge';
 
-export default async function Home() {
-    const hello = await api.post.hello.query({text: "from tRPC"});
+export default function Home() {
     const rotations = ['rotate-2', '-rotate-2', 'rotate-2', 'rotate-2', '-rotate-2']
 
     return (
@@ -43,7 +41,7 @@ export default async function Home() {
                             rotations[imageIndex % rotations.length],
                         )}
                     >
-                        <Image alt="Thumbnail" src={image} sizes="(min-width: 640px) 1rem, 11rem"
+                        <Image alt="Thumbnail" src={image} sizes="(min-width: 640px) 1rem, 11rem" width="640"
                                className="absolute inset-0 h-full w-full object-cover"/>
                     </div>
                 ))}
