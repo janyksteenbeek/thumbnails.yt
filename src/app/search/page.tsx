@@ -21,9 +21,12 @@ export default async function Search({searchParams}: {
         case 'channel_id':
             return redirect(`/channel/${type.id}`);
         case 'channel_username':
-            const id = await api.channels.findIdByUsername.query({username: type.id});
-            return redirect(`/channel/${id}`);
         default:
-            return redirect(`/?e=invalid_url`);
+            const id = await api.channels.findIdByUsername.query({username: type.id});
+            if (!id) {
+                return redirect(`/?e=invalid_url`);
+            }
+            return redirect(`/channel/${id}`);
+
     }
 }
