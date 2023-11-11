@@ -12,8 +12,8 @@ const inter = Inter({
 });
 
 export const metadata = {
-    title: "Find all YouTube thumbnails for a channel or video | thumbnails.yt",
-    description: "Easily find all full-size live & A/B test YouTube thumbnails for channel or video",
+    title: "A/B Test YouTube thumbnail explorer | thumbnails.yt",
+    description: "Search and compare A/B test video thumbnails from any YouTube channel, gaining comprehensive visual insights to maximize your content strategy",
 };
 
 export default function RootLayout({
@@ -21,6 +21,7 @@ export default function RootLayout({
                                    }: {
     children: React.ReactNode;
 }) {
+
     return (
         <html lang="en" className="h-full">
         <body className={`thumbnails-yt h-full font-sans ${inter.variable} bg-cover bg-[url(/bg-thumbs.png)]`}>
