@@ -13,6 +13,8 @@ const API_KEY = process.env.YT_KEY;
 
 export async function getChannelIdByUsername(username: string): Promise<string | null> {
     try {
+        if (username.startsWith("@")) username = username.slice(1);
+
         const response = await youtube.channels.list({
             part: ['id'],
             forUsername: username,
