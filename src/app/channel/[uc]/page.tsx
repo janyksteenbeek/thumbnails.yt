@@ -5,6 +5,7 @@ export const runtime = 'edge';
 
 export default async function Page({params}: { params: { uc: string } }) {
     const channel = await api.channels.get.query({uc: params.uc});
+    console.log(channel);
     const videos = await api.channels.uploads.query({id: channel?.contentDetails?.relatedPlaylists?.uploads ?? ""});
 
     return (
