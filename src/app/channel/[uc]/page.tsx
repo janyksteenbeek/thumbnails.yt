@@ -3,7 +3,7 @@ import {api} from "~/trpc/server";
 
 export const runtime = 'edge';
 
-export default async function Page({params}: { params: { uc: string } }) {
+export default async function Channel({params}: { params: { uc: string } }) {
     const channel = await api.channels.get.query({uc: params.uc});
     console.log(channel);
     const videos = await api.channels.uploads.query({id: channel?.contentDetails?.relatedPlaylists?.uploads ?? ""});

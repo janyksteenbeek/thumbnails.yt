@@ -1,6 +1,8 @@
 import {api} from "~/trpc/server";
 import {redirect} from "next/navigation";
 
+export const runtime = 'edge';
+
 export default async function Search({searchParams}: {
     searchParams: Record<string, string | string[] | undefined>
 }) {
