@@ -1,6 +1,8 @@
 import Link from "next/link";
 import {api} from "~/trpc/server";
 
+// export const runtime = 'edge'; @todo werkt niet?
+
 export default async function Channel({params}: { params: { uc: string } }) {
     const channel = await api.channels.get.query({uc: params.uc});
     console.log(channel);
