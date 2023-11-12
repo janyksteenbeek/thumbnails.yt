@@ -13,7 +13,7 @@ export default async function Search({searchParams}: {
     }
 
     const type = await api.search.determinePath.query({url: query});
-    if (!type?.id) {
+    if (!type) {
         return redirect(`/?e=invalid_url`);
     }
 
@@ -24,7 +24,7 @@ export default async function Search({searchParams}: {
             return redirect(`/channel/${type.id}`);
         case 'channel_username':
         default:
-            const id = await api.channels.findIdByUsername.query({username: type.id});
+            const id = await api.channels.findIdByUsername.query({username: type.id ?? query ?? ""});
             if (!id) {
                 return redirect(`/?e=invalid_url`);
             }

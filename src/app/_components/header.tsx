@@ -6,11 +6,11 @@ export default function Header() {
     return <>
         <nav className="flex items-center lg:justify-between justify-center gap-6 p-6 lg:px-8" aria-label="Global">
             <div className="flex lg:flex-1">
-                <a href="#" className="-m-1.5 p-1.5">
+                <Link href="/" className="-m-1.5 p-1.5">
                     <span className="sr-only">thumbnails.yt</span>
                     <Image src="/logo.svg" alt="thumbnails.yt" width="32" height="32" className="text-white"
                            color="white"/>
-                </a>
+                </Link>
             </div>
             <form action={"/search"} method="get"
                   className="flex lg:flex-1 flex-grow group rounded-full bg-white/30 hover:bg-white transition px-3 text-sm py-3 font-light gap-3 items-center text-zinc-800 shadow-lg shadow-zinc-300/5 ring-1 ring-zinc-900/5 backdrop-blur ">

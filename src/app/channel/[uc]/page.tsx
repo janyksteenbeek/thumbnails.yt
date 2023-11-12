@@ -9,12 +9,14 @@ export default async function Channel({params}: { params: { uc: string } }) {
     return (
         <div className="px-12 lg:px-24">
             <div className="flex flex-col sm:flex-row gap-8 items-center my-16">
-                <img
-                    src={channel?.snippet?.thumbnails?.high?.url ?? ""}
-                    width="180"
-                    alt={channel?.snippet?.title ?? ""}
-                    className="border-red-700 border-4 rounded-full shadow-sm w-36 sm:w-44 md:w-56"
-                />
+                <Link target="_blank" href={`https://www.youtube.com/channel/${channel?.id}`}>
+                    <img
+                        src={channel?.snippet?.thumbnails?.high?.url ?? ""}
+                        width="180"
+                        alt={channel?.snippet?.title ?? ""}
+                        className="border-red-700 border-4 rounded-full shadow-sm w-36 sm:w-44 md:w-56"
+                    />
+                </Link>
                 <div>
                     <div
                         className="bg-transparent font-extrabold text-white text-4xl sm:text-6xl md:text-7xl lg:text-8xl shadow-[inset_0_-0.5em_0_0_rgb(253_22_20_/_70%)]">
