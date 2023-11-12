@@ -37,7 +37,7 @@ export default async function Channel({params}: { params: { uc: string } }) {
                         <div className="relative">
                             <img
                                 alt={video.snippet?.title ?? ""}
-                                className="object-cover w-full h-48 group-hover:opacity-75"
+                                className="object-cover w-full h-48"
                                 src={video.snippet?.thumbnails?.maxres?.url ?? video.snippet?.thumbnails?.high?.url ?? ""}
                                 style={{
                                     aspectRatio: "1280/720",

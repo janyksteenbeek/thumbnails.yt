@@ -25,13 +25,13 @@ export default function Home() {
                     strategists,
                     video marketers, and content creators aiming to stand out in a competitive digital landscape.</h2>
 
-                <div
-                    className="flex mx-auto w-full md:w-4/5 lg:w-3/4 rounded-full bg-white/90  border-4 shadow-sm border-red-700 px-6 text-sm py-6 shadow-lg font-light gap-3 items-center text-zinc-800 shadow-lg shadow-zinc-300/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
-                    <SearchIcon className="w-5 h-5 text-white text-red-500"/>
-                    <input type="text" name="search" id="search"
-                           placeholder="Find thumbnails by YouTube channel or video URL"
-                           className="bg-transparent w-full text-zinc-600 text-sm placeholder-zinc-400 focus:outline-none"/>
-                </div>
+                <form action="/search"
+                      className="flex mx-auto w-full md:w-4/5 lg:w-3/4 rounded-full bg-white/90  border-4 shadow-sm border-red-700 px-6 text-sm py-6 shadow-lg font-light gap-3 items-center text-zinc-800 shadow-lg shadow-zinc-300/5 ring-1 ring-zinc-900/5 backdrop-blur">
+                    <button type="submit"><SearchIcon className="w-5 h-5  text-red-500"/></button>
+                    <input type="text" name="q" id="search"
+                           placeholder="Discover thumbnails by YouTube channel URL or video URL"
+                           className="bg-transparent w-full text-zinc-600 text-sm placeholder-zinc-500 focus:outline-none"/>
+                </form>
 
             </div>
 
