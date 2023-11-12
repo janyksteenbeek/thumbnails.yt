@@ -1,11 +1,11 @@
 import {SearchIcon} from "lucide-react";
 import Image from "next/image";
-import image1 from '~/../public/thumbnails/mrbeast-1.jpeg'
-import image2 from '~/../public/thumbnails/mrbeast-2.jpeg'
-import image3 from '~/../public/thumbnails/joshua-1.jpeg'
-import image4 from '~/../public/thumbnails/joshua-2.jpeg'
-import image5 from '~/../public/thumbnails/ryan-1.jpeg'
-import image6 from '~/../public/thumbnails/ryan-2.jpeg'
+import image1 from '../../public/static/thumbnails/mrbeast-1.jpeg'
+import image2 from '../../public/static/thumbnails/mrbeast-2.jpeg'
+import image3 from '../../public/static/thumbnails/joshua-1.jpeg'
+import image4 from '../../public/static/thumbnails/joshua-2.jpeg'
+import image5 from '../../public/static/thumbnails/ryan-1.jpeg'
+import image6 from '../../public/static/thumbnails/ryan-2.jpeg'
 import {clsx} from "clsx";
 
 export const runtime = 'edge';
