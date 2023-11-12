@@ -13,7 +13,8 @@ const inter = Inter({
 });
 
 export const metadata = {
-    title: "A/B Test YouTube thumbnail explorer | thumbnails.yt",
+    title: "Discover & view A/B test YouTube thumbnails | thumbnails.yt",
+
     description: "Search and compare A/B test video thumbnails from any YouTube channel, gaining comprehensive visual insights to maximize your content strategy",
 };
 
