@@ -32,6 +32,11 @@ export default function RootLayout({
             {children}
             <Footer/>
         </TRPCReactProvider>
+
+
+        <script async defer src="https://trekker.thumbnails.yt/latest.js"></script>
+        <noscript><img src="https://trekker.thumbnails.yt/noscript.gif" alt=""
+                       referrerPolicy="no-referrer-when-downgrade"/></noscript>
         </body>
         </html>
     );
