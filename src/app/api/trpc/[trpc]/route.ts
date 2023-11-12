@@ -3,7 +3,8 @@ import {type NextRequest} from "next/server";
 import {appRouter} from "~/server/api/root";
 import {createTRPCContext} from "~/server/api/trpc";
 
-export const handler = (req: NextRequest) =>
+
+const handler = (req: NextRequest) =>
     fetchRequestHandler({
         endpoint: "/api/trpc",
         req,
@@ -14,7 +15,8 @@ export const handler = (req: NextRequest) =>
                 console.error(
                     `❌ tRPC failed on ${path ?? "<no-path>"}: ${error.message}`
                 );
-            },
+            }
+
     });
 
 export {handler as GET, handler as POST};
