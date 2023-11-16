@@ -117,7 +117,7 @@ export async function getThumbnailsAndLabels(videoId: string): Promise<{ imageUr
 
     for (const url of thumbnailUrls) {
         const index = thumbnailUrls.indexOf(url);
-        const response = await fetch(url, {method: 'HEAD'});
+        const response = await fetch(url, {...cacheSetup, method: 'HEAD'});
         if (response.status === 200) {
             count++;
             imageUrls.push(url);
