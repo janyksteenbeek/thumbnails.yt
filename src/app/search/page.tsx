@@ -1,5 +1,6 @@
 import {api} from "~/trpc/server";
 import {redirect} from "next/navigation";
+import {track} from "@vercel/analytics";
 
 // export const runtime = 'edge'; @todo werkt niet?
 
@@ -11,6 +12,9 @@ export default async function Search({searchParams}: {
     if (!query) {
         return redirect('/');
     }
+
+    track('Search', {q: query});
+
 
     const type = await api.search.determinePath.query({url: query});
     if (!type) {
