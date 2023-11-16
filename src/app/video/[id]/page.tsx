@@ -12,7 +12,7 @@ export default async function Video({params}: { params: { id: string } }) {
             <div className="flex flex-col sm:flex-row lg:gap-8 gap-2 items-center my-8 lg:my-16">
                 <div>
                     <div
-                        className="bg-transparent font-extrabold text-white text-4xl sm:text-6xl md:text-7xl lg:text-8xl shadow-[inset_0_-0.5em_0_0_rgb(253_22_20_/_70%)]">
+                        className="bg-transparent font-extrabold text-white text-4xl sm:text-6xl lg:text-8xl shadow-[inset_0_-0.5em_0_0_rgb(253_22_20_/_70%)]">
                         {video?.snippet?.title}
                     </div>
                     <div
