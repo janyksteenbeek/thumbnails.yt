@@ -24,22 +24,28 @@ const VideoThumbnailsShelf: React.FC<ABThumbnailProps> = async ({videoId}) => {
     };
 
     return (
-        <div className={"grid gap-4 md:grid-cols-" + (labels.length + 1)}>
-            <Suspense fallback={<img alt="Video Thumbnail"
-                                     src={"https://i.ytimg.com/vi/" + videoId + "/maxresdefault.jpg"}/>}>
-                {renderImages()}
-            </Suspense>
-            <div className="relative group">
-                <iframe src={"https://www.youtube-nocookie.com/embed/" + videoId}
-                        className="h-full w-full border-red-700 border-8"
-                        allow="encrypted-media; picture-in-picture"
-                        allowFullScreen/>
-                <div
-                    className="absolute bottom-4 right-4 group-hover:hidden bg-black bg-opacity-50 text-white px-2 py-1 text-sm rounded">
-                    Original video
+        <>
+            <div className={"grid gap-4 md:grid-cols-" + (labels.length + 1)}>
+                <Suspense fallback={<img alt="Video Thumbnail"
+                                         src={"https://i.ytimg.com/vi/" + videoId + "/maxresdefault.jpg"}/>}>
+                    {renderImages()}
+                </Suspense>
+                <div className="relative group">
+                    <iframe src={"https://www.youtube-nocookie.com/embed/" + videoId}
+                            className="h-full w-full border-red-700 border-8"
+                            allow="encrypted-media; picture-in-picture"
+                            allowFullScreen/>
+                    <div
+                        className="absolute bottom-4 right-4 group-hover:hidden bg-black bg-opacity-50 text-white px-2 py-1 text-sm rounded">
+                        Original video
+                    </div>
                 </div>
             </div>
-        </div>
+
+            <div className="md:grid-cols-1 md:grid-cols-2 md:grid-cols-3 md:grid-cols-4"></div>
+        </>
+
+
     );
 };
 
