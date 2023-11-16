@@ -10,15 +10,16 @@ export default async function Channel({params}: { params: { uc: string } }) {
     const videos = await api.channels.uploads.query({id: channel?.contentDetails?.relatedPlaylists?.uploads ?? ""});
 
     return (
-        <div className="px-12 lg:px-24">
-            <div className="flex flex-col sm:flex-row gap-8 items-center my-16">
+        <div className="px-4 lg:px-24">
+            <div className="flex flex-col sm:flex-row lg:gap-8 gap-2 items-center my-8 lg:my-16">
                 <Link target="_blank" href={`https://www.youtube.com/channel/${channel?.id}`}>
 
-                    <img src={channel?.snippet?.thumbnails?.high?.url ?? ""}
-                         width="180"
-                         height="180"
-                         alt={channel?.snippet?.title ?? ""}
-                         className="border-red-700 border-4 rounded-full shadow-sm w-36 sm:w-44 md:w-56"
+                    <img
+                        src={channel?.snippet?.thumbnails?.maxres?.url ?? channel?.snippet?.thumbnails?.high?.url ?? ""}
+                        width="180"
+                        height="180"
+                        alt={channel?.snippet?.title ?? ""}
+                        className="border-red-700 border-4 rounded-full shadow-sm w-36 sm:w-44 md:w-56"
                     />
                 </Link>
                 <div>
@@ -31,7 +32,7 @@ export default async function Channel({params}: { params: { uc: string } }) {
                     </div>
                 </div>
             </div>
-            <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-4 p-4">
+            <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 lg:gap-6 p-4">
                 {videos.map(video => (
                     <div className="relative group overflow-hidden rounded-lg" key={video.id}>
                         <Link className="absolute inset-0 z-10" href={'/video/' + video.contentDetails?.videoId}>

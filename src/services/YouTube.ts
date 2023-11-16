@@ -1,6 +1,7 @@
 import {google, youtube_v3} from "googleapis";
 import Schema$PlaylistItem = youtube_v3.Schema$PlaylistItem;
 import Schema$Channel = youtube_v3.Schema$Channel;
+import Schema$Video = youtube_v3.Schema$Video;
 
 type YouTubeLinkType = 'video' | 'channel_id' | 'channel_username' | null;
 type YouTubeLinkInfo = {
@@ -76,6 +77,26 @@ export async function getPublicUploadVideoIds(playlistId: string): Promise<Schem
     }
 }
 
+export async function getVideo(videoId: string): Promise<Schema$Video | undefined> {
+    try {
+        const response = await youtube.videos.list({
+            part: ['snippet', 'statistics'],
+            id: [videoId],
+            key: API_KEY,
+        });
+
+        if (!response.data.items || response.data.items.length === 0) {
+            console.warn('No video found for the given ID');
+            return;
+        }
+
+        return response.data.items[0];
+    } catch (error) {
+        console.error('Error fetching video details:', error);
+        return;
+    }
+}
+
 export function parseYouTubeUrl(url: string): YouTubeLinkInfo {
     // Regular expressions for the various YouTube URL formats
     const videoRegex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i;
@@ -96,4 +117,38 @@ export function parseYouTubeUrl(url: string): YouTubeLinkInfo {
 
     // If no match, return unknown type
     return {type: null};
+}
+
+export async function getThumbnailsAndLabels(videoId: string): Promise<{ imageUrls: string[], labels: string[] }> {
+    const thumbnailUrls = [
+        "https://i.ytimg.com/vi/" + videoId + "/maxresdefault_custom_1.jpg",
+        "https://i.ytimg.com/vi/" + videoId + "/maxresdefault_custom_2.jpg",
+        "https://i.ytimg.com/vi/" + videoId + "/maxresdefault_custom_3.jpg",
+    ];
+
+    let imageUrls: string[] = [];
+    let labels: string[] = [];
+    const thumbnailTitles = [
+        "A", "B", "C"
+    ];
+
+    let count = 0;
+
+    for (const url of thumbnailUrls) {
+        const index = thumbnailUrls.indexOf(url);
+        const response = await fetch(url, {method: 'HEAD'});
+        if (response.status === 200) {
+            count++;
+            imageUrls.push(url);
+            labels.push(thumbnailTitles[index] + "");
+        }
+    }
+
+    if (count === 0 || count === 1) {
+        console.log("No custom thumbnails found for video " + videoId + ", using default thumbnail")
+        labels = [];
+        imageUrls = ["https://i.ytimg.com/vi/" + videoId + "/maxresdefault.jpg"];
+    }
+
+    return {imageUrls, labels};
 }
