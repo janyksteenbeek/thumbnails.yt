@@ -1,7 +1,4 @@
-import {google, youtube_v3} from "googleapis";
-import Schema$PlaylistItem = youtube_v3.Schema$PlaylistItem;
-import Schema$Channel = youtube_v3.Schema$Channel;
-import Schema$Video = youtube_v3.Schema$Video;
+import {youtube_v3} from "googleapis";
 
 type YouTubeLinkType = 'video' | 'channel_id' | 'channel_username' | null;
 type YouTubeLinkInfo = {
@@ -9,90 +6,74 @@ type YouTubeLinkInfo = {
     id?: string;
 };
 
-const youtube = google.youtube('v3');
+const cacheSetup = {
+    next: {
+        revalidate: 3600,
+    },
+};
+
 const API_KEY = process.env.YT_KEY;
 
 export async function getChannelIdByUsername(username: string): Promise<string | null> {
+    if (username.startsWith("@")) username = username.slice(1);
+    const url = `https://www.googleapis.com/youtube/v3/channels?part=id&forUsername=${username}&key=${API_KEY}`;
+
     try {
-        if (username.startsWith("@")) username = username.slice(1);
+        const response = await fetch(url, cacheSetup);
+        const data = await response.json() as youtube_v3.Schema$ChannelListResponse;
 
-        const response = await youtube.channels.list({
-            part: ['id'],
-            forUsername: username,
-            key: API_KEY,
-        });
-
-        const channels = response.data.items
-        if (!channels || channels.length === 0) {
+        if (!data.items || data.items.length === 0 || !data.items[0]?.id) {
             console.log('No channel found for this username.');
             return null;
         }
-
-        return channels[0]?.id ?? null;
+        return data.items[0]?.id
     } catch (error) {
         console.error('Error fetching channel ID:', error);
         return null;
     }
 }
 
-export async function getChannel(channelId: string): Promise<Schema$Channel | null> {
-    try {
-        const response = await youtube.channels.list({
-            part: ['contentDetails', 'snippet'],
-            id: [channelId],
-            key: API_KEY,
-        });
+export async function getChannel(channelId: string): Promise<youtube_v3.Schema$Channel | null> {
+    const url = `https://www.googleapis.com/youtube/v3/channels?part=contentDetails,snippet&id=${channelId}&key=${API_KEY}`;
 
-        const channels = response.data.items;
-        if (!channels || channels.length === 0) {
-            console.log('No channel found for this channel ID.');
+    try {
+        const response = await fetch(url, cacheSetup);
+        const data = await response.json() as youtube_v3.Schema$ChannelListResponse;
+        if (!data.items || data.items.length === 0 || !data.items[0]) {
+            console.log('No channel found for this ID.');
             return null;
         }
-
-        return channels[0] ?? null;
+        return data.items[0];
     } catch (error) {
-        console.error('Error fetching uploads playlist ID:', error);
+        console.error('Error fetching channel:', error);
         return null;
     }
 }
 
 
-export async function getPublicUploadVideoIds(playlistId: string): Promise<Schema$PlaylistItem[]> {
+export async function getPublicUploadVideoIds(playlistId: string): Promise<youtube_v3.Schema$PlaylistItem[]> {
+    const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&playlistId=${playlistId}&maxResults=15&key=${API_KEY}`;
+
     try {
-        const response = await youtube.playlistItems.list({
-            part: ['snippet', 'contentDetails'],
-            playlistId: playlistId,
-            maxResults: 15,
-            key: API_KEY,
-        });
-
-        if (!response.data.items) {
-            return [];
-        }
-
-        return response.data.items
+        const response = await fetch(url, cacheSetup);
+        const data = await response.json() as youtube_v3.Schema$PlaylistItemListResponse;
+        return data.items ?? [];
     } catch (error) {
         console.error('Error fetching video IDs:', error);
         return [];
     }
 }
 
-export async function getVideo(videoId: string): Promise<Schema$Video | undefined> {
+
+export async function getVideo(videoId: string): Promise<youtube_v3.Schema$Video | undefined> {
+    const url = `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${videoId}&key=${API_KEY}`;
+
     try {
-        const response = await youtube.videos.list({
-            part: ['snippet', 'statistics'],
-            id: [videoId],
-            key: API_KEY,
-        });
-
-        if (!response.data.items || response.data.items.length === 0) {
-            console.warn('No video found for the given ID');
-            return;
-        }
-
-        return response.data.items[0];
+        const response = await fetch(url, cacheSetup);
+        const data = await response.json() as youtube_v3.Schema$VideoListResponse;
+        return data.items && data.items.length > 0 ? data.items[0] : undefined;
     } catch (error) {
-        console.error('Error fetching video details:', error);
+        console.error('Error fetching video:', error);
         return;
     }
 }
