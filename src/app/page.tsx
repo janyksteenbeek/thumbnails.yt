@@ -14,8 +14,9 @@ export default function Home() {
     const rotations = ['rotate-2', '-rotate-2', 'rotate-2', 'rotate-2', '-rotate-2', "rotate-2"]
 
     return (
-        <main className="flex  flex-col text-white ">
-            <div className="container mx-auto flex flex-col w-full lg:w-3/5 text-center gap-12 px-4 py-24 mt-14">
+        <main className="flex flex-col text-white">
+            <div
+                className="container mx-auto flex flex-col w-full lg:w-3/5 text-center gap-12 px-4 py-4 xl:py-24 lg:py-16 mt-14">
                 <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold balance">Find and compare A/B test <span
                     className="bg-transparent font-extrabold text-white shadow-[inset_0_-0.5em_0_0_rgb(253_22_20_/_70%)]">thumbnails</span> for
                     YouTube videos</h1>
@@ -35,18 +36,17 @@ export default function Home() {
 
             </div>
 
-            <div className="-my-4 flex justify-center gap-5 overflow-hidden py-4 sm:gap-8">
+            <div className="-my-4 flex justify-center gap-0.5 overflow-hidden py-16 lg:py-2 sm:gap-8">
                 {[image1, image2, image3, image4, image5, image6].map((image, imageIndex) => (
                     <div
                         key={image.src}
                         className={clsx(
-                            'relative aspect-[9/6] w-64 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl',
+                            'relative aspect-[9/6] w-32 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl',
                             rotations[imageIndex % rotations.length],
                         )}
                     >
                         <Image alt="Thumbnail" src={image} placeholder="blur"
-                               width={740} height={760}
-
+                               width={540} height={760}
                                className="absolute inset-0 object-cover w-full h-full"/>
                     </div>
                 ))}

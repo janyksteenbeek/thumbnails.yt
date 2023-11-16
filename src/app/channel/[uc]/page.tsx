@@ -1,22 +1,24 @@
 import Link from "next/link";
 import {api} from "~/trpc/server";
+import {Suspense} from "react";
+import AbThumbnail from "~/app/_components/ab-thumbnail";
 
 // export const runtime = 'edge'; @todo werkt niet?
 
 export default async function Channel({params}: { params: { uc: string } }) {
     const channel = await api.channels.get.query({uc: params.uc});
-    console.log(channel);
     const videos = await api.channels.uploads.query({id: channel?.contentDetails?.relatedPlaylists?.uploads ?? ""});
 
     return (
         <div className="px-12 lg:px-24">
             <div className="flex flex-col sm:flex-row gap-8 items-center my-16">
                 <Link target="_blank" href={`https://www.youtube.com/channel/${channel?.id}`}>
-                    <img
-                        src={channel?.snippet?.thumbnails?.high?.url ?? ""}
-                        width="180"
-                        alt={channel?.snippet?.title ?? ""}
-                        className="border-red-700 border-4 rounded-full shadow-sm w-36 sm:w-44 md:w-56"
+
+                    <img src={channel?.snippet?.thumbnails?.high?.url ?? ""}
+                         width="180"
+                         height="180"
+                         alt={channel?.snippet?.title ?? ""}
+                         className="border-red-700 border-4 rounded-full shadow-sm w-36 sm:w-44 md:w-56"
                     />
                 </Link>
                 <div>
@@ -35,24 +37,19 @@ export default async function Channel({params}: { params: { uc: string } }) {
                         <Link className="absolute inset-0 z-10" href={'/video/' + video.contentDetails?.videoId}>
                         </Link>
                         <div className="relative">
-                            <img
+                            <Suspense fallback={<img
                                 alt={video.snippet?.title ?? ""}
-                                className="object-cover w-full h-48"
                                 src={video.snippet?.thumbnails?.maxres?.url ?? video.snippet?.thumbnails?.high?.url ?? ""}
-                                style={{
-                                    aspectRatio: "1280/720",
-                                    objectFit: "cover",
-                                }}
-                                height={400}
-                            />
+
+                            />}>
+                                <AbThumbnail videoId={video.contentDetails?.videoId ?? ""}/>
+                            </Suspense>
                             <div
                                 className="absolute bottom-2 right-2 bg-black bg-opacity-50 text-white px-2 py-1 text-xs rounded">
                                 {video.contentDetails?.endAt}
                             </div>
                         </div>
-                        <div
-                            className="absolute top-2 left-2 bg-black bg-opacity-50 text-white px-1 py-0.5 text-xxs rounded">A
-                        </div>
+
                         <div className="p-4">
                             <h3 className="font-semibold text-lg md:text-xl text-white line-clamp-3">{video.snippet?.title}</h3>
                             <p className="text-sm text-white mb-2">Published

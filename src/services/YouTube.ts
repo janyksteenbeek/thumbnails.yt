@@ -61,7 +61,7 @@ export async function getPublicUploadVideoIds(playlistId: string): Promise<Schem
         const response = await youtube.playlistItems.list({
             part: ['snippet', 'contentDetails'],
             playlistId: playlistId,
-            maxResults: 15, // Maximum allowed by YouTube API
+            maxResults: 15,
             key: API_KEY,
         });
 
