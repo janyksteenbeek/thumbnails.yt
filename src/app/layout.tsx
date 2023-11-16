@@ -25,7 +25,7 @@ export default function RootLayout({
 }) {
 
     return (
-        <html lang="en" className="h-full">
+        <html lang="en" className="h-full bg-red-900">
         <body className={`thumbnails-yt h-full font-sans ${inter.variable} bg-cover bg-[url(/static/bg-thumbs.png)]`}>
         <TRPCReactProvider headers={headers()}>
             <Header/>
