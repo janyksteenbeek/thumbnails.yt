@@ -30,7 +30,7 @@ const VideoThumbnailsShelf: React.FC<ABThumbnailProps> = async ({videoId}) => {
                 {renderImages()}
             </Suspense>
             <div className="relative group">
-                <iframe src={"https://www.youtube-noco®okie.com/embed/" + videoId}
+                <iframe src={"https://www.youtube-nocookie.com/embed/" + videoId}
                         className="h-full w-full border-red-700 border-8"
                         allow="encrypted-media; picture-in-picture"
                         allowFullScreen/>
