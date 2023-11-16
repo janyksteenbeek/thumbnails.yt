@@ -29,6 +29,16 @@ const VideoThumbnailsShelf: React.FC<ABThumbnailProps> = async ({videoId}) => {
                                      src={"https://i.ytimg.com/vi/" + videoId + "/maxresdefault.jpg"}/>}>
                 {renderImages()}
             </Suspense>
+            <div className="relative group">
+                <iframe src={"https://www.youtube-noco®okie.com/embed/" + videoId}
+                        className="h-full w-full border-red-700 border-8"
+                        allow="encrypted-media; picture-in-picture"
+                        allowFullScreen/>
+                <div
+                    className="absolute bottom-4 right-4 group-hover:hidden bg-black bg-opacity-50 text-white px-2 py-1 text-sm rounded">
+                    Original video
+                </div>
+            </div>
         </div>
     );
 };
