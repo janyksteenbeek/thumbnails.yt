@@ -25,7 +25,7 @@ const VideoThumbnailsShelf: React.FC<ABThumbnailProps> = async ({videoId}) => {
 
     return (
         <>
-            <div className={"grid gap-4 md:grid-cols-" + (labels.length + 1)}>
+            <div className={"grid gap-4 md:grid-cols-" + (imageUrls.length + 1)}>
                 <Suspense fallback={<img alt="Video Thumbnail"
                                          src={"https://i.ytimg.com/vi/" + videoId + "/maxresdefault.jpg"}/>}>
                     {renderImages()}
