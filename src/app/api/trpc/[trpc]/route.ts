@@ -3,6 +3,7 @@ import {type NextRequest} from "next/server";
 import {appRouter} from "~/server/api/root";
 import {createTRPCContext} from "~/server/api/trpc";
 
+export const runtime = 'edge';
 
 const handler = (req: NextRequest) =>
     fetchRequestHandler({
