@@ -7,8 +7,18 @@ import {track} from "@vercel/analytics/server";
 
 export const runtime = 'edge';
 
+export async function generateMetadata({params}: { params: { id: string } }) {
+    const video = await api.videos.get.query({id: params.id});
+
+    return {
+        title: video?.snippet?.title ?? "thumbnails.yt"
+    }
+}
+
+
 export default async function Video({params}: { params: { id: string } }) {
     const video = await api.videos.get.query({id: params.id});
+
     await track('Video visit', {videoId: params.id});
 
     return (

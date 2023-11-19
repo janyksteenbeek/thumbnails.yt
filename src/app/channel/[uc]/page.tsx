@@ -7,6 +7,15 @@ import Spinner from "~/app/_components/spinner";
 
 export const runtime = 'edge';
 
+export async function generateMetadata({params}: { params: { uc: string } }) {
+    const channel = await api.channels.get.query({uc: params.uc});
+
+    return {
+        title: channel?.snippet?.title ?? "Channel",
+        description: "Find and compare A/B test video thumbnails of " + channel?.snippet?.title ?? ""
+    }
+}
+
 export default async function Channel({params}: { params: { uc: string } }) {
     await track('Channel visit', {channelId: params.uc});
 
@@ -15,7 +24,6 @@ export default async function Channel({params}: { params: { uc: string } }) {
     async function videos() {
         return await api.channels.uploads.query({id: channel?.contentDetails?.relatedPlaylists?.uploads ?? ""});
     }
-
 
     return (
         <div className="px-4 lg:px-24">
