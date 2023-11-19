@@ -3,13 +3,13 @@ import {Suspense} from "react";
 import Spinner from "~/app/_components/spinner";
 import VideoThumbnailsShelf from "~/app/_components/video-thumbnails-shelf";
 import Link from "next/link";
-import {track} from "@vercel/analytics";
+import {track} from "@vercel/analytics/server";
 
 export const runtime = 'edge';
 
 export default async function Video({params}: { params: { id: string } }) {
     const video = await api.videos.get.query({id: params.id});
-    track('Video visit', {videoId: params.id});
+    await track('Video visit', {videoId: params.id});
 
     return (
         <div className="px-4 lg:px-24">

@@ -4,6 +4,7 @@ import {appRouter} from "~/server/api/root";
 import {createTRPCContext} from "~/server/api/trpc";
 
 export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 const handler = (req: NextRequest) =>
     fetchRequestHandler({

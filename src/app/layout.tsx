@@ -13,6 +13,8 @@ const inter = Inter({
     variable: "--font-sans",
 });
 
+export const runtime = 'edge';
+
 export const metadata = {
     title: "Discover & view A/B test YouTube thumbnails | thumbnails.yt",
 

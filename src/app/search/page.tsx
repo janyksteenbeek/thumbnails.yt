@@ -1,8 +1,6 @@
 import {api} from "~/trpc/server";
 import {redirect} from "next/navigation";
-import {track} from "@vercel/analytics";
-
-export const runtime = 'edge';
+import {track} from "@vercel/analytics/server";
 
 export default async function Search({searchParams}: {
     searchParams: Record<string, string | string[] | undefined>
@@ -13,7 +11,7 @@ export default async function Search({searchParams}: {
         return redirect('/');
     }
 
-    track('Search', {q: query});
+    await track('Search', {q: query});
 
     const type = await api.search.determinePath.query({url: query});
     if (!type) {

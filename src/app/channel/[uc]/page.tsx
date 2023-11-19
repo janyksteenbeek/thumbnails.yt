@@ -2,12 +2,12 @@ import Link from "next/link";
 import {api} from "~/trpc/server";
 import {Suspense} from "react";
 import AbThumbnail from "~/app/_components/ab-thumbnail";
-import {track} from "@vercel/analytics";
+import {track} from "@vercel/analytics/server";
 
 export const runtime = 'edge';
 
 export default async function Channel({params}: { params: { uc: string } }) {
-    track('Channel visit', {channelId: params.uc});
+    await track('Channel visit', {channelId: params.uc});
 
     const channel = await api.channels.get.query({uc: params.uc});
     const videos = await api.channels.uploads.query({id: channel?.contentDetails?.relatedPlaylists?.uploads ?? ""});
