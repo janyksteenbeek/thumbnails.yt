@@ -1,6 +1,6 @@
 import {type youtube_v3} from "googleapis";
 
-type YouTubeLinkType = 'video' | 'channel_id' | 'channel_username' | null;
+type YouTubeLinkType = 'video' | 'channel_id' | 'channel_username' | 'channel_handle' | null;
 type YouTubeLinkInfo = {
     type: YouTubeLinkType;
     id?: string;
@@ -78,15 +78,22 @@ export async function getVideo(videoId: string): Promise<youtube_v3.Schema$Video
     }
 }
 
+
 export function parseYouTubeUrl(url: string): YouTubeLinkInfo {
     // Regular expressions for the various YouTube URL formats
     const videoRegex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i;
-    const channelRegex = /(?:youtube\.com\/(channel\/|c\/|user\/|@)([^"&?\/\s]+))/i;
+    const channelRegex = /(?:youtube\.com\/(channel\/|c\/|user\/)([^"&?\/\s]+))/i;
+    const atChannelRegex = /(?:youtube\.com\/@|@)([^"&?\/\s]+)/i;
 
     // Check for video URL and extract the ID
     const videoMatch = url.match(videoRegex);
     if (videoMatch) {
         return {type: 'video', id: videoMatch[1]};
+    }
+
+    const handleMatch = url.match(atChannelRegex);
+    if (handleMatch) {
+        return {type: 'channel_handle', id: handleMatch[1]};
     }
 
     // Check for channel URL and extract the ID or name
@@ -98,6 +105,13 @@ export function parseYouTubeUrl(url: string): YouTubeLinkInfo {
 
     // If no match, return unknown type
     return {type: null};
+}
+
+export async function getChannelIdFromHandle(handle: string): Promise<string | null> {
+    const html = await (await fetch('https://www.youtube.com/' + handle)).text()
+    if (!html) return null;
+
+    return html.match(/(?<=channelId(":"|"\scontent="))[^"]+/g)?.[0] ?? null;
 }
 
 export async function getThumbnailsAndLabels(videoId: string): Promise<{ imageUrls: string[], labels: string[] }> {

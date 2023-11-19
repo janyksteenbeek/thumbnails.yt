@@ -1,7 +1,7 @@
 import {z} from "zod";
 
 import {createTRPCRouter, publicProcedure} from "~/server/api/trpc";
-import {getChannel, getChannelIdByUsername, getPublicUploadVideoIds} from "~/services/YouTube";
+import {getChannel, getChannelIdByUsername, getChannelIdFromHandle, getPublicUploadVideoIds} from "~/services/YouTube";
 
 export const channelRoutes = createTRPCRouter({
     get: publicProcedure
@@ -13,6 +13,11 @@ export const channelRoutes = createTRPCRouter({
         .input(z.object({username: z.string()}))
         .query(({input}) => {
             return getChannelIdByUsername(input.username);
+        }),
+    findIdByHandle: publicProcedure
+        .input(z.object({handle: z.string()}))
+        .query(({input}) => {
+            return getChannelIdFromHandle(input.handle);
         }),
     uploads: publicProcedure
         .input(z.object({id: z.string()}))
