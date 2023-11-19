@@ -34,7 +34,10 @@ export default function RootLayout({
         <body className={`h-full font-sans ${inter.variable} `}>
         <TRPCReactProvider headers={headers()}>
             <Header/>
-            <Suspense fallback={<Spinner/>}>
+            <Suspense fallback={
+                <div className="flex flex-col items-center justify-center py-2">
+                    <Spinner/>
+                </div>}>
                 {children}
             </Suspense>
             <Footer/>
