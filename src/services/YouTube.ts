@@ -1,4 +1,4 @@
-import {youtube_v3} from "googleapis";
+import {type youtube_v3} from "googleapis";
 
 type YouTubeLinkType = 'video' | 'channel_id' | 'channel_username' | null;
 type YouTubeLinkInfo = {
@@ -66,7 +66,7 @@ export async function getPublicUploadVideoIds(playlistId: string): Promise<youtu
 
 
 export async function getVideo(videoId: string): Promise<youtube_v3.Schema$Video | undefined> {
-    const url = `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${videoId}&key=${API_KEY}`;
+    const url = `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${API_KEY}`;
 
     try {
         const response = await fetch(url, cacheSetup);
@@ -113,19 +113,18 @@ export async function getThumbnailsAndLabels(videoId: string): Promise<{ imageUr
         "A", "B", "C"
     ];
 
-    let count = 0;
+    const fetchPromises = thumbnailUrls.map((url, index) =>
+        fetch(url, {...cacheSetup, method: 'HEAD'}).then(response => {
+            if (response.status === 200) {
+                imageUrls.push(url);
+                labels.push(thumbnailTitles[index] + "");
+            }
+        })
+    );
 
-    for (const url of thumbnailUrls) {
-        const index = thumbnailUrls.indexOf(url);
-        const response = await fetch(url, {...cacheSetup, method: 'HEAD'});
-        if (response.status === 200) {
-            count++;
-            imageUrls.push(url);
-            labels.push(thumbnailTitles[index] + "");
-        }
-    }
+    await Promise.all(fetchPromises);
 
-    if (count === 0 || count === 1) {
+    if (imageUrls.length === 0 || imageUrls.length === 1) {
         console.log("No custom thumbnails found for video " + videoId + ", using default thumbnail")
         labels = [];
         imageUrls = ["https://i.ytimg.com/vi/" + videoId + "/maxresdefault.jpg"];

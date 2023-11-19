@@ -22,19 +22,14 @@ export default async function Video({params}: { params: { id: string } }) {
                     <div
                         className="mt-2 text-xl sm:text-2xl font-bold text-white flex gap-2 md:gap-8 items-center flex-col md:flex-row">
                         <Link href={"/channel/" + video?.snippet?.channelId}>{video?.snippet?.channelTitle}</Link>
-                        <span
-                            className="bg-red-600/30 text-white px-2 py-1 rounded">{(new Intl.NumberFormat()).format(parseInt(video?.statistics?.viewCount ?? "") ?? 0)} views</span>
                     </div>
                 </div>
             </div>
 
-            <div className="">
-                <Suspense fallback={<Spinner/>}>
-                    <VideoThumbnailsShelf videoId={params.id}/>
-                </Suspense>
-            </div>
+            <Suspense fallback={<Spinner/>}>
+                <VideoThumbnailsShelf videoId={params.id}/>
+            </Suspense>
         </div>
-
 
     );
 }
