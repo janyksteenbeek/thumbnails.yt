@@ -7,6 +7,8 @@ import {headers} from "next/headers";
 import {TRPCReactProvider} from "~/trpc/react";
 import Header from "~/app/_components/header";
 import Footer from "~/app/_components/footer";
+import {Suspense} from "react";
+import Spinner from "~/app/_components/spinner";
 
 const inter = Inter({
     subsets: ["latin"],
@@ -32,7 +34,9 @@ export default function RootLayout({
         <body className={`h-full font-sans ${inter.variable} `}>
         <TRPCReactProvider headers={headers()}>
             <Header/>
-            {children}
+            <Suspense fallback={<Spinner/>}>
+                {children}
+            </Suspense>
             <Footer/>
             <Analytics/>
         </TRPCReactProvider>

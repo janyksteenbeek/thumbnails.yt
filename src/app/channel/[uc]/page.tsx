@@ -3,6 +3,7 @@ import {api} from "~/trpc/server";
 import {Suspense} from "react";
 import AbThumbnail from "~/app/_components/ab-thumbnail";
 import {track} from "@vercel/analytics/server";
+import Spinner from "~/app/_components/spinner";
 
 export const runtime = 'edge';
 
@@ -10,7 +11,11 @@ export default async function Channel({params}: { params: { uc: string } }) {
     await track('Channel visit', {channelId: params.uc});
 
     const channel = await api.channels.get.query({uc: params.uc});
-    const videos = await api.channels.uploads.query({id: channel?.contentDetails?.relatedPlaylists?.uploads ?? ""});
+
+    async function videos() {
+        return await api.channels.uploads.query({id: channel?.contentDetails?.relatedPlaylists?.uploads ?? ""});
+    }
+
 
     return (
         <div className="px-4 lg:px-24">
@@ -36,31 +41,33 @@ export default async function Channel({params}: { params: { uc: string } }) {
                 </div>
             </div>
             <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 lg:gap-6 p-4">
-                {videos.map(video => (
-                    <div className="relative group overflow-hidden rounded-lg" key={video.id}>
-                        <Link className="absolute inset-0 z-10" href={'/video/' + video.contentDetails?.videoId}>
-                        </Link>
-                        <div className="relative">
-                            <Suspense fallback={<img
-                                alt={video.snippet?.title ?? ""}
-                                src={video.snippet?.thumbnails?.maxres?.url ?? video.snippet?.thumbnails?.high?.url ?? ""}
+                <Suspense fallback={<Spinner/>}>
+                    {(await videos()).map(video => (
+                        <div className="relative group overflow-hidden rounded-lg" key={video.id}>
+                            <Link className="absolute inset-0 z-10" href={'/video/' + video.contentDetails?.videoId}>
+                            </Link>
+                            <div className="relative">
+                                <Suspense fallback={<img
+                                    alt={video.snippet?.title ?? ""}
+                                    src={video.snippet?.thumbnails?.maxres?.url ?? video.snippet?.thumbnails?.high?.url ?? ""}
 
-                            />}>
-                                <AbThumbnail videoId={video.contentDetails?.videoId ?? ""}/>
-                            </Suspense>
-                            <div
-                                className="absolute bottom-2 right-2 bg-black bg-opacity-50 text-white px-2 py-1 text-xs rounded">
-                                {video.contentDetails?.endAt}
+                                />}>
+                                    <AbThumbnail videoId={video.contentDetails?.videoId ?? ""}/>
+                                </Suspense>
+                                <div
+                                    className="absolute bottom-2 right-2 bg-black bg-opacity-50 text-white px-2 py-1 text-xs rounded">
+                                    {video.contentDetails?.endAt}
+                                </div>
+                            </div>
+
+                            <div className="p-4">
+                                <h3 className="font-semibold text-lg md:text-xl text-white line-clamp-3">{video.snippet?.title}</h3>
+                                <p className="text-sm text-white mb-2">Published
+                                    at {(new Date(video.snippet?.publishedAt ?? "").toLocaleString())}</p>
                             </div>
                         </div>
-
-                        <div className="p-4">
-                            <h3 className="font-semibold text-lg md:text-xl text-white line-clamp-3">{video.snippet?.title}</h3>
-                            <p className="text-sm text-white mb-2">Published
-                                at {(new Date(video.snippet?.publishedAt ?? "").toLocaleString())}</p>
-                        </div>
-                    </div>
-                ))}
+                    ))}
+                </Suspense>
             </section>
         </div>
 
