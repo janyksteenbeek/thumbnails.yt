@@ -4,7 +4,7 @@ import {Suspense} from "react";
 import AbThumbnail from "~/app/_components/ab-thumbnail";
 import {track} from "@vercel/analytics";
 
-// export const runtime = 'edge'; @todo werkt niet?
+export const runtime = 'edge';
 
 export default async function Channel({params}: { params: { uc: string } }) {
     track('Channel visit', {channelId: params.uc});

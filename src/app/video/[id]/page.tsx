@@ -5,6 +5,8 @@ import VideoThumbnailsShelf from "~/app/_components/video-thumbnails-shelf";
 import Link from "next/link";
 import {track} from "@vercel/analytics";
 
+export const runtime = 'edge';
+
 export default async function Video({params}: { params: { id: string } }) {
     const video = await api.videos.get.query({id: params.id});
     track('Video visit', {videoId: params.id});
