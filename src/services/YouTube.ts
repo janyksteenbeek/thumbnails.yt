@@ -137,12 +137,12 @@ export async function getThumbnailsAndLabels(videoId: string): Promise<{ imageUr
         fetch(url, {...cacheSetup, method: 'HEAD'}).then(response => {
             if (response.status === 200) {
                 imageUrls.push(url);
-                labels.push(thumbnailTitles[index] + "");
             }
         })
     );
 
     await Promise.all(fetchPromises);
+    labels = thumbnailTitles.slice(0, imageUrls.length)
 
     if (imageUrls.length === 0 || imageUrls.length === 1) {
         console.log("No custom thumbnails found for video " + videoId + ", using default thumbnail")
