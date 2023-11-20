@@ -23,8 +23,31 @@ export const metadata: Metadata = {
         template: '%s | thumbnails.yt',
         default: 'thumbnails.yt'
     },
-    description: "Search and compare A/B test video thumbnails from any YouTube channel, gaining comprehensive visual insights to maximize your content strategy",
+    description: "Search and compare A/B YouTube video thumbnails from any YouTube channel, gaining comprehensive visual insights to maximize your content strategy",
+    openGraph: {
+        type: 'website',
+        locale: 'en_US',
+        url: 'https://thumbnails.yt',
+        siteName: 'thumbnails.yt',
+        images: [
+            {
+                url: '/static/og-image.png',
+                width: 1920,
+                height: 1080,
+                alt: 'thumbnails.yt',
+            }
+        ],
+        description: "Search and compare A/B test YouTube  video thumbnails from any YouTube channel, gaining comprehensive visual insights to maximize your content strategy",
+    },
+    icons: [
+        {
+            href: '/static/favicon.png',
+            url: '/static/favicon.png',
+            type: 'image/png',
+        },
+    ],
 }
+
 
 export default function RootLayout({children,}: { children: React.ReactNode; }) {
 
