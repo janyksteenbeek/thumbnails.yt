@@ -113,7 +113,11 @@ export async function getChannelIdFromHandle(handle: string): Promise<string | n
     const html = await (await fetch('https://www.youtube.com/@' + handle, cacheSetup)).text()
     if (!html) return null;
 
-    return html.match(/(?<=channelId(":"|"\scontent="))[^"]+/g)?.[0] ?? null;
+    const regex = /vnd\.youtube:\/\/www\.youtube\.com\/channel\/(UC[A-Za-z0-9_-]{22})/;
+    const match = html.match(regex);
+    if (!match) return null;
+
+    return match[1] ?? null;
 }
 
 export async function getThumbnailsAndLabels(videoId: string): Promise<{ imageUrls: string[], labels: string[] }> {
