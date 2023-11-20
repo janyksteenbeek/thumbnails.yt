@@ -19,6 +19,7 @@ const inter = Inter({
 export const runtime = 'edge';
 
 export const metadata: Metadata = {
+    metadataBase: new URL('https://thumbnails.yt'),
     title: {
         template: '%s | thumbnails.yt',
         default: 'Explore A/B test YouTube video thumbnails | thumbnails.yt'
@@ -41,6 +42,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         creator: '@janyksteenbeek',
+        site: '@janyksteenbeek',
+        card: 'summary_large_image',
         description: "Search and compare A/B test YouTube video thumbnails from any YouTube channel",
         images: [
             {
