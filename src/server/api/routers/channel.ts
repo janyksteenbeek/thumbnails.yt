@@ -15,7 +15,7 @@ export const channelRoutes = createTRPCRouter({
             return getChannelIdByUsername(input.username);
         }),
     findIdByHandle: publicProcedure
-        .input(z.object({handle: z.string().regex(/^@/)}))
+        .input(z.object({handle: z.string()}))
         .query(({input}) => {
             return getChannelIdFromHandle(input.handle);
         }),
