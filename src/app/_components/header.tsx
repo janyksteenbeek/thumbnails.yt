@@ -8,7 +8,7 @@ export default function Header() {
             <div className="flex lg:flex-1">
                 <Link href="/" className="-m-1.5 p-1.5">
                     <span className="sr-only">thumbnails.yt</span>
-                    <Image src="/static/logo.svg" alt="thumbnails.yt" width="32" height="32" className="text-white"
+                    <Image src="/static/logo.svg" alt="thumbnails.yt" width="42" height="42" className="text-white"
                            color="white"/>
                 </Link>
             </div>
@@ -18,7 +18,7 @@ export default function Header() {
                     <SearchIcon className="w-5 h-5 text-zinc-400 dark:text-zinc-200"/>
                 </button>
                 <input type="text" name="q" id="search"
-                       placeholder="Find thumbnails by YouTube channel or video URL"
+                       placeholder="YouTube channel URL / video URL"
                        className="bg-transparent min-w-full inline-block lg:min-w-[500px] w-full text-white placeholder-zinc-300 group-hover:placeholder-zinc-600 group-hover:text-zinc-500 focus:outline-none"/>
             </form>
             <div className="hidden lg:flex lg:flex-1 lg:justify-end">

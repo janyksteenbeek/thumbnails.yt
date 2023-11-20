@@ -16,18 +16,21 @@ export default function Home() {
     return (
         <main className="flex flex-col text-white">
             <div
-                className="container mx-auto flex flex-col w-full lg:w-3/5 text-center gap-12 px-4 py-4 xl:py-24 lg:py-16 mt-14">
-                <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold balance">Find and compare A/B test <span
-                    className="bg-transparent font-extrabold text-white shadow-[inset_0_-0.5em_0_0_rgb(253_22_20_/_70%)]">thumbnails</span> for
-                    YouTube videos</h1>
-                <h2 className="text-md md:text-lg lg:text-xl lg:w-3/4 lg:m-auto">Explore every angle get direct insight
-                    in what leading content strategies are used by comparing A/B YouTube thumbnails of all YouTube
-                    creators. Perfect for YouTube
+                className="container mx-auto flex flex-col w-full lg:w-4/6 text-center gap-12 px-4 py-4 xl:py-24 lg:py-16 mt-14">
+                <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold balance animate-in fade-in-25 slide-in-from-top delay-150 duration-500">Discover
+                    Every A/B <span
+                        className="bg-transparent font-extrabold text-white shadow-[inset_0_-0.5em_0_0_rgb(253_22_20_/_70%)]">YouTube Thumbnail
+                    </span> Variation with Ease</h1>
+                <h2 className="text-md md:text-lg lg:text-xl lg:w-3/4 lg:m-auto animate-in fade-in-25 slide-in-from-top delay-200 duration-500">Explore
+                    every angle and get direct
+                    insight
+                    in what leading content creators are using by comparing A/B YouTube thumbnails of all YouTube
+                    creators. Perfect for YouTube content
                     strategists,
-                    video marketers, and content creators aiming to stand out in a competitive digital landscape.</h2>
+                    video marketers, and content creators aiming to stand out.</h2>
 
                 <form action="/search"
-                      className="flex mx-auto w-full md:w-4/5 lg:w-3/4 rounded-full bg-white/90  border-4 shadow-sm border-red-700 px-6 text-sm py-6 shadow-lg font-light gap-3 items-center text-zinc-800 shadow-lg shadow-zinc-300/5 ring-1 ring-zinc-900/5 backdrop-blur">
+                      className="flex mx-auto w-full md:w-4/5 lg:w-3/4 rounded-full bg-white/90  border-4 shadow-lg animate-in fade-in-25 slide-in-from-top delay-200 duration-300 border-red-700 px-6 text-sm py-6 font-light gap-3 items-center text-zinc-800 shadow-zinc-300/5 ring-1 ring-zinc-900/5 backdrop-blur">
                     <button type="submit"><SearchIcon className="w-5 h-5  text-red-500"/></button>
                     <input type="text" name="q" id="search"
                            placeholder="Discover thumbnails by YouTube channel URL or video URL"
@@ -36,7 +39,8 @@ export default function Home() {
 
             </div>
 
-            <div className="-my-4 flex justify-center gap-0.5 overflow-hidden py-16 lg:py-2 sm:gap-8">
+            <div
+                className="-my-4 flex justify-center gap-0.5 overflow-hidden py-16 lg:py-2 sm:gap-8 spin-in-2 animate-in fade-in-25 delay-400 duration-1000">
                 {[image1, image2, image3, image4, image5, image6].map((image, imageIndex) => (
                     <div
                         key={image.src}
