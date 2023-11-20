@@ -110,7 +110,7 @@ export function parseYouTubeUrl(url: string): YouTubeLinkInfo {
 }
 
 export async function getChannelIdFromHandle(handle: string): Promise<string | null> {
-    const html = await (await fetch('https://www.youtube.com/' + handle, cacheSetup)).text()
+    const html = await (await fetch('https://www.youtube.com/@' + handle, cacheSetup)).text()
     if (!html) return null;
 
     return html.match(/(?<=channelId(":"|"\scontent="))[^"]+/g)?.[0] ?? null;
