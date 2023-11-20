@@ -21,7 +21,7 @@ export const runtime = 'edge';
 export const metadata: Metadata = {
     title: {
         template: '%s | thumbnails.yt',
-        default: 'thumbnails.yt'
+        default: 'Explore A/B test YouTube video thumbnails | thumbnails.yt'
     },
     description: "Search and compare A/B YouTube video thumbnails from any YouTube channel, gaining comprehensive visual insights to maximize your content strategy",
     openGraph: {
@@ -31,13 +31,25 @@ export const metadata: Metadata = {
         siteName: 'thumbnails.yt',
         images: [
             {
-                url: '/static/og-image.png',
+                url: '/static/social.jpg',
                 width: 1920,
                 height: 1080,
                 alt: 'thumbnails.yt',
             }
         ],
         description: "Search and compare A/B test YouTube  video thumbnails from any YouTube channel, gaining comprehensive visual insights to maximize your content strategy",
+    },
+    twitter: {
+        creator: '@janyksteenbeek',
+        description: "Search and compare A/B test YouTube video thumbnails from any YouTube channel",
+        images: [
+            {
+                url: '/static/social.jpg',
+                width: 1920,
+                height: 1080,
+                alt: 'thumbnails.yt',
+            }
+        ],
     },
     icons: [
         {

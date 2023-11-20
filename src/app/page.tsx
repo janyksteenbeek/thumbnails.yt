@@ -21,7 +21,7 @@ export default function Home() {
                     Every A/B <span
                         className="bg-transparent font-extrabold text-white shadow-[inset_0_-0.5em_0_0_rgb(253_22_20_/_70%)]">YouTube Thumbnail
                     </span> Variation with Ease</h1>
-                <h2 className="text-md md:text-lg lg:text-xl lg:w-3/4 lg:m-auto animate-in fade-in-25 slide-in-from-top delay-100 duration-500">Explore
+                <h2 className="text-md md:text-lg lg:text-xl lg:w-3/4 lg:m-auto animate-in fade-in-25 slide-in-from-top delay-75 duration-500">Explore
                     every angle and get direct
                     insight
                     in what leading content creators are using by comparing A/B YouTube thumbnails of all YouTube
@@ -30,7 +30,7 @@ export default function Home() {
                     video marketers, and content creators aiming to stand out.</h2>
 
                 <form action="/search"
-                      className="flex mx-auto w-full md:w-4/5 lg:w-3/4 rounded-full bg-white/90  border-4 shadow-lg animate-in fade-in-25 from-0% to-100% slide-in-from-top delay-150 duration-700 border-red-700 px-6 text-sm py-6 font-light gap-3 items-center text-zinc-800 shadow-zinc-300/5 ring-1 ring-zinc-900/5 backdrop-blur">
+                      className="flex mx-auto w-full md:w-4/5 lg:w-3/4 rounded-full bg-white/90  border-4 shadow-lg animate-in fade-in-25 from-0% to-100% slide-in-from-top delay-100 duration-700 border-red-700 px-6 text-sm py-6 font-light gap-3 items-center text-zinc-800 shadow-zinc-300/5 ring-1 ring-zinc-900/5 backdrop-blur">
                     <button type="submit"><SearchIcon className="w-5 h-5  text-red-500"/></button>
                     <input type="text" name="q" id="search"
                            placeholder="Discover thumbnails by YouTube channel URL or video URL"
