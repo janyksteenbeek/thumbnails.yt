@@ -18,9 +18,9 @@ export default function Home() {
             <div
                 className="container mx-auto flex flex-col w-full lg:w-4/6 text-center gap-12 px-4 py-4 xl:py-24 lg:py-16 mt-14">
                 <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold balance animate-in fade-in-25 slide-in-from-top  duration-500">Discover
-                    Every A/B <span
+                    every A/B <span
                         className="bg-transparent font-extrabold text-white shadow-[inset_0_-0.5em_0_0_rgb(253_22_20_/_70%)]">YouTube Thumbnail
-                    </span> Variation with Ease</h1>
+                    </span> variation with ease</h1>
                 <h2 className="text-md md:text-lg lg:text-xl lg:w-3/4 lg:m-auto animate-in fade-in-25 slide-in-from-top delay-75 duration-500">Explore
                     every angle and get direct
                     insight
