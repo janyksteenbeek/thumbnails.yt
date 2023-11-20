@@ -34,7 +34,7 @@ export async function getChannelIdByUsername(username: string): Promise<string |
 }
 
 export async function getChannel(channelId: string): Promise<youtube_v3.Schema$Channel | null> {
-    const url = `https://www.googleapis.com/youtube/v3/channels?part=contentDetails,snippet&id=${channelId}&key=${API_KEY}`;
+    const url = `https://www.googleapis.com/youtube/v3/channels?part=snippet&id=${channelId}&key=${API_KEY}`;
 
     try {
         const response = await fetch(url, cacheSetup);
@@ -51,7 +51,9 @@ export async function getChannel(channelId: string): Promise<youtube_v3.Schema$C
 }
 
 
-export async function getPublicUploadVideoIds(playlistId: string): Promise<youtube_v3.Schema$PlaylistItem[]> {
+export async function getPublicUploadVideoIds(channelId: string): Promise<youtube_v3.Schema$PlaylistItem[]> {
+    const playlistId = 'UULF' + channelId.substring(2);
+
     const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&playlistId=${playlistId}&maxResults=15&key=${API_KEY}`;
 
     try {

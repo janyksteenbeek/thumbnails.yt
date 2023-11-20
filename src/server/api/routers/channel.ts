@@ -5,7 +5,7 @@ import {getChannel, getChannelIdByUsername, getChannelIdFromHandle, getPublicUpl
 
 export const channelRoutes = createTRPCRouter({
     get: publicProcedure
-        .input(z.object({uc: z.string()}))
+        .input(z.object({uc: z.string().regex(/^UC/)}))
         .query(({input}) => {
             return getChannel(input.uc);
         }),
@@ -15,14 +15,13 @@ export const channelRoutes = createTRPCRouter({
             return getChannelIdByUsername(input.username);
         }),
     findIdByHandle: publicProcedure
-        .input(z.object({handle: z.string()}))
+        .input(z.object({handle: z.string().regex(/^@/)}))
         .query(({input}) => {
             return getChannelIdFromHandle(input.handle);
         }),
     uploads: publicProcedure
-        .input(z.object({id: z.string()}))
+        .input(z.object({uc: z.string().regex(/^UC/)}))
         .query(({input}) => {
-            return getPublicUploadVideoIds(input.id);
-
+            return getPublicUploadVideoIds(input.uc);
         }),
 });

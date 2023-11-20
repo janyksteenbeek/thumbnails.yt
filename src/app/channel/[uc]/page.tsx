@@ -22,7 +22,7 @@ export default async function Channel({params}: { params: { uc: string } }) {
     const channel = await api.channels.get.query({uc: params.uc});
 
     async function videos() {
-        return await api.channels.uploads.query({id: channel?.contentDetails?.relatedPlaylists?.uploads ?? ""});
+        return await api.channels.uploads.query({uc: params.uc});
     }
 
     return (
