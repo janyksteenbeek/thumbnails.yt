@@ -30,7 +30,7 @@ export default async function Channel({params}: { params: { uc: string } }) {
                 <Link target="_blank" href={`https://www.youtube.com/channel/${channel?.id}`}>
 
                     <img
-                        src={channel?.snippet?.thumbnails?.maxres?.url ?? channel?.snippet?.thumbnails?.high?.url ?? ""}
+                        src={channel?.snippet?.thumbnails?.high?.url ?? ""}
                         width="180"
                         height="180"
                         alt={channel?.snippet?.title ?? ""}

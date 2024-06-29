@@ -3,7 +3,6 @@ import {Suspense} from "react";
 import Spinner from "~/app/_components/spinner";
 import VideoThumbnailsShelf from "~/app/_components/video-thumbnails-shelf";
 import Link from "next/link";
-import {track} from "@vercel/analytics/server";
 
 export const runtime = 'edge';
 
@@ -17,9 +16,9 @@ export async function generateMetadata({params}: { params: { id: string } }) {
 
 
 export default async function Video({params}: { params: { id: string } }) {
-    const video = await api.videos.get.query({id: params.id});
+    void umami.track("Video view", {[params.id]: "Video view"})
 
-    await track('Video visit', {videoId: params.id});
+    const video = await api.videos.get.query({id: params.id});
 
     return (
         <div className="px-4 lg:px-24">
