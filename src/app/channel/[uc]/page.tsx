@@ -2,7 +2,6 @@ import Link from "next/link";
 import {api} from "~/trpc/server";
 import {Suspense} from "react";
 import AbThumbnail from "~/app/_components/ab-thumbnail";
-import {track} from "@vercel/analytics/server";
 import Spinner from "~/app/_components/spinner";
 
 export const runtime = 'edge';
@@ -17,7 +16,7 @@ export async function generateMetadata({params}: { params: { uc: string } }) {
 }
 
 export default async function Channel({params}: { params: { uc: string } }) {
-    await track('Channel visit', {channelId: params.uc});
+    void umami.track("Channel view", {[params.uc]: "Channel view"})
 
     const channel = await api.channels.get.query({uc: params.uc});
 

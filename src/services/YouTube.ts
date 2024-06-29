@@ -122,11 +122,10 @@ export async function getChannelIdFromHandle(handle: string): Promise<string | n
 
 export async function getThumbnailsAndLabels(videoId: string): Promise<{ imageUrls: string[], labels: string[] }> {
     const thumbnailUrls = [
-        "https://i.ytimg.com/vi/" + videoId + "/maxresdefault_custom_1.jpg",
+        "",
         "https://i.ytimg.com/vi/" + videoId + "/maxresdefault_custom_2.jpg",
         "https://i.ytimg.com/vi/" + videoId + "/maxresdefault_custom_3.jpg",
     ];
-
     let imageUrls: string[] = [];
     let labels: string[] = [];
     const thumbnailTitles = [
