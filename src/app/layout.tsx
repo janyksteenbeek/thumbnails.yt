@@ -9,7 +9,7 @@ import Header from "~/app/_components/header";
 import Footer from "~/app/_components/footer";
 import {Suspense} from "react";
 import Spinner from "~/app/_components/spinner";
-import {Metadata} from "next";
+import {type Metadata} from "next";
 
 const inter = Inter({
     subsets: ["latin"],
@@ -82,9 +82,8 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
         </TRPCReactProvider>
 
 
-        <script async defer src="https://trekker.thumbnails.yt/latest.js"></script>
-        <noscript><img src="https://trekker.thumbnails.yt/noscript.gif" alt=""
-                       referrerPolicy="no-referrer-when-downgrade"/></noscript>
+        <script defer src="https://statisfyer.nl/script.js"
+                data-website-id="16dae9b8-790b-467b-9bd5-99026f934ba1"></script>
         </body>
         </html>
     );
